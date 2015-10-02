@@ -1,15 +1,35 @@
 buildscript {
     ext {
+        bootstrapFrameworkVersion = "1.0.3"
         grailsVersion = project.grailsVersion
+        bootstrapFramework = [
+                //version             : "3.3.5",
+                //cssPath             : "",
+                //jsPath              : "",
+                useIndividualJs: true,
+                useLess        : true,
+                //invalidVersionFails : false
+                fontAwesome    : [
+                        install: true,
+                        //version             : "4.3.0"
+                        useLess: true,
+                        //invalidVersionFails : false
+                ]
+        ]
+        assetPiplineGradleVersion = "2.3.8"
+        assetPipelineGrailsVersion = "3.0.2"
+        assetPipelineLessVersion = "2.3.0"
     }
     repositories {
         mavenLocal()
+        jcenter()
         maven { url "https://repo.grails.org/grails/core" }
     }
-    dependencies {        
+    dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.5.0'
-        classpath "org.grails.plugins:hibernate:4.3.10.5"
+        classpath "com.siprell.plugins:bootstrap-framework:$bootstrapFrameworkVersion"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:$assetPiplineGradleVersion"
+        classpath "com.bertramlabs.plugins:less-asset-pipeline:$assetPipelineLessVersion"
     }
 }
 
@@ -20,6 +40,7 @@ plugins {
 version "0.1"
 group "grails_bootstrap_sample"
 
+apply plugin: "com.siprell.plugins.bootstrap-framework"
 apply plugin: "spring-boot"
 apply plugin: "war"
 apply plugin: "asset-pipeline"
@@ -36,6 +57,7 @@ ext {
 assets {
     minifyJs = true
     minifyCss = true
+    excludes = ["mixins/*.less"]
 }
 
 repositories {
@@ -57,12 +79,13 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
-
     compile "org.grails.plugins:hibernate"
     compile "org.grails.plugins:cache"
     compile "org.hibernate:hibernate-ehcache"
-    compile "org.grails.plugins:scaffolding"
 
+    runtime "org.grails.plugins:asset-pipeline:$assetPipelineGrailsVersion"
+    runtime "com.bertramlabs.plugins:less-asset-pipeline:$assetPipelineLessVersion"
+    runtime "org.grails.plugins:scaffolding"
     runtime "org.grails.plugins:asset-pipeline"
 
     testCompile "org.grails:grails-plugin-testing"
