@@ -31,7 +31,10 @@
 
 # "temporary" build files
 /target
+build
 
-#idea
+.asscache
+
+# IntelliJ
 .idea
 *.iml
