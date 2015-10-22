@@ -8,7 +8,7 @@ Based upon [bootstrap-framework-sample](https://github.com/kensiprell/bootstrap-
 
 ### Less compiling problems while gradle build
 
-Problem: Asset pipeline tries to compiles not only the bootstrap.less
+Problem: Asset pipeline compiles more then the bootstrap.less
 
 ```
 * What went wrong:
@@ -30,7 +30,7 @@ Execution failed for task ':assetCompile'.
   **Did you mean to compile this file individually (check docs on exclusion)?**
 ```
 
-Solution: Exclude all other less files than the bootstrap.less within teh gradle configuration (build.gradle). 
+Solution: Exclude all other less files then the bootstrap.less within the gradle configuration (build.gradle). 
 
 ```
 - excludes = ["mixins/*.less"]
