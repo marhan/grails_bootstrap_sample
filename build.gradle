@@ -57,7 +57,8 @@ ext {
 assets {
     minifyJs = true
     minifyCss = true
-    excludes = ["mixins/*.less"]
+    excludes = ["**/*.less"]
+    includes = ["**/bootstrap.less"]
 }
 
 repositories {
